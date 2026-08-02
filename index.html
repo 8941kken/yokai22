@@ -1,0 +1,128 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17110c">
+<meta name="description" content="二十二の妖怪絵図から一枚を選び、陽と陰の働きを通して今の心と次の一歩を読み解く独自の一枚占術。">
+<title>妖怪二十二絵図占術｜カード完全補正版 v1.3.3</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">本文へ移動</a>
+<div class="mist mist-a"></div><div class="mist mist-b"></div>
+<div class="floating-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<header class="site-header">
+  <p class="eyebrow">YOKAI NIJUNI EZU</p>
+  <h1>妖怪二十二絵図占術</h1>
+  <p class="lead">妖怪の姿に映る、いまの心と次の一歩。</p>
+  <div class="header-tools">
+</div>
+</header>
+
+<main id="main">
+<section class="panel intro" id="intro">
+  <p class="step">第一の刻</p>
+  <h2>テーマを選ぶ</h2>
+  <p class="section-copy">いま知りたいことに最も近いテーマを一つ選んでください。テーマごとに読み方を分け、今の状況と次の一歩を示します。</p>
+  <div class="themes" id="themes" aria-label="占うテーマ"></div>
+<button class="primary" id="beginBtn" type="button">ここをクリック（次へ）</button>
+  <p class="notice">12のテーマと全22枚の絵図から、一つの結果を読み解きます。履歴はこのブラウザ内に30件まで保存され、外部へ送信されません。</p>
+</section>
+
+<section class="panel draw hidden" id="draw">
+  <p class="step">第二の刻</p>
+  <h2>札を選ぶ</h2>
+  <p class="section-copy" id="drawGuide" aria-live="polite">札を混ぜています。心が静まるまで、少しお待ちください。</p>
+  <div class="shuffle-stage" id="shuffleStage" aria-hidden="true">
+    <div class="shuffle-card card-one"></div>
+    <div class="shuffle-card card-two"></div>
+    <div class="shuffle-card card-three"></div>
+  </div>
+  <div class="deck deck-hidden" id="deck"></div>
+  <button class="ghost" id="backBtn" type="button">テーマを選び直す</button>
+</section>
+
+<section class="panel result hidden" id="result" aria-live="polite">
+  <p class="step">第三の刻</p>
+  <p class="result-theme" id="resultTheme"></p>
+  <div class="result-grid">
+    <div class="card-stage">
+      <img id="cardImage" alt="">
+    </div>
+    <article class="reading">
+      <div class="polarity-row">
+        <p class="orientation" id="orientation"></p>
+        <button class="term-help" id="termHelpBtn" type="button" aria-label="陽と陰の説明">?</button>
+      </div>
+      <h2 id="cardTitle"></h2>
+      <p class="yokai" id="yokaiName"></p>
+      <p class="central-theme" id="centralTheme"></p>
+      <blockquote id="phrase"></blockquote>
+      <section class="reading-block voice-block">
+        <h3>妖怪からの言葉</h3>
+        <p id="yokaiVoice"></p>
+      </section>
+      <section class="reading-block">
+        <h3>テーマの読み</h3>
+        <p id="themeReading"></p>
+      </section>
+      <section class="reading-block guidance-block">
+        <h3>今日の導き</h3>
+        <p id="guidance"></p>
+      </section>
+      <section class="reading-block lore-block">
+        <h3>この妖怪について</h3>
+        <p id="yokaiLore"></p>
+      </section>
+      <div class="keywords" id="keywords"></div>
+      <details class="symbols">
+        <summary>この絵図の象徴を見る</summary>
+        <dl id="symbolList"></dl>
+      </details>
+    </article>
+  </div>
+  <div class="actions">
+    <button class="primary" id="againBtn" type="button">もう一度占う</button>
+    <button class="ghost" id="copyBtn" type="button">結果をコピー</button>
+    <button class="ghost" id="homeBtn" type="button">最初に戻る</button>
+  </div>
+</section>
+</main>
+
+<div class="modal hidden" id="historyModal" role="dialog" aria-modal="true" aria-labelledby="historyTitle">
+  <div class="modal-backdrop" data-close="history"></div>
+  <section class="modal-panel">
+    <button class="modal-close" data-close="history" aria-label="閉じる">×</button>
+    <p class="step">記録の巻</p>
+    <h2 id="historyTitle">占い履歴</h2>
+    <p class="section-copy">このブラウザに保存された直近30件です。</p>
+    <div id="historyList" class="history-list"></div>
+    <button class="danger-button" id="clearHistoryBtn" type="button">履歴をすべて消す</button>
+  </section>
+</div>
+
+<div class="modal hidden" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+  <div class="modal-backdrop" data-close="about"></div>
+  <section class="modal-panel prose-panel">
+    <button class="modal-close" data-close="about" aria-label="閉じる">×</button>
+    <p class="step">占術の巻</p>
+    <h2 id="aboutTitle">妖怪二十二絵図占術とは</h2>
+    <p>二十二の妖怪を、人の心や暮らしの動きを映す象徴として読み解く独自の一枚占術です。</p>
+    <h3>陽</h3>
+    <p>力が外へ表れ、行動・交流・実現として働く面です。</p>
+    <h3>陰</h3>
+    <p>力が内側へ向かい、見直し・休息・慎重さとして働く面です。</p>
+    <p>陽を良い、陰を悪いとは定めません。どちらも今の状況を理解するために必要な働きです。</p>
+    <p class="small-note">季節、方角、色などの対応は、この作品の読みを統一するための独自設定です。</p>
+  </section>
+</div>
+
+<footer>
+  <p>本占術は娯楽と自己対話を目的としています。医療・法律・投資などの重要な判断は、適切な専門家へご相談ください。</p>
+  <p>© 妖怪二十二絵図占術</p>
+</footer>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
